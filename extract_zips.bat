@@ -3,13 +3,13 @@
 :: Windows 11 獨立運作 ZIP 自動密碼解析與解壓縮工具
 :: 說明：請直接雙擊此批次檔執行，它將自動搜尋目錄下所有 *.zip 並完成解密與解壓縮。
 :: =====================================================================
-title ZIP Auto Decryptor & Extractor
+title "ZIP Auto Decryptor & Extractor"
 echo =====================================================================
 echo  正在搜尋並解析當前目錄下的 *.zip 加密檔案...
 echo =====================================================================
 echo.
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$s=[System.IO.File]::ReadAllText('%~f0'); $s=$s.Substring($s.IndexOf('GOTO :EOF') + 9); Invoke-Expression $s"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-Expression ((Get-Content -LiteralPath '%~f0' -Raw) -split 'POWERSHELL_START', 2)[1]"
 
 echo.
 echo =====================================================================
@@ -18,6 +18,7 @@ echo =====================================================================
 pause
 GOTO :EOF
 
+# POWERSHELL_START
 # =====================================================================
 # POWERSHELL + C# 程式碼區段 (雙擊時自動於記憶體編譯並執行，不產生暫存檔)
 # =====================================================================
